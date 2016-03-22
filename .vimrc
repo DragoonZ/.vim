@@ -15,6 +15,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 " airline {{{
@@ -55,14 +56,9 @@ call plug#end()
     nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
     nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 
-    " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
-    " old version
-    if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
-    endif
     " new version
-    if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    if !empty(glob("~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
     endif
 
     " 直接触发自动补全 insert模式下
@@ -72,6 +68,81 @@ call plug#end()
         \ 'tagbar' : 1,
         \ 'gitcommit' : 1,
         \}
+" }}}
+
+" 语法检查
+" syntastic {{{
+    " dependence
+    " 1. shellcheck `brew install shellcheck` https://github.com/koalaman/shellcheck
+
+    let g:syntastic_error_symbol='>>'
+    let g:syntastic_warning_symbol='>'
+    let g:syntastic_check_on_open=1
+    let g:syntastic_check_on_wq=0
+    let g:syntastic_enable_highlighting=1
+
+    " checkers
+    " 最轻量
+    " let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
+    " 中等
+    " error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
+    let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
+    let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
+    " 重量级, 但是足够强大, 定制完成后相当个性化
+    " pylint codes: http://pylint-messages.wikidot.com/all-codes
+    " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
+    " let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
+    " let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+
+    " if js
+    " let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+    " let g:syntastic_html_checkers=['tidy', 'jshint']
+
+    " to see error location list
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_auto_jump = 0
+    let g:syntastic_loc_list_height = 5
+
+    function! ToggleErrors()
+        let old_last_winnr = winnr('$')
+        lclose
+        if old_last_winnr == winnr('$')
+            " Nothing was closed, open syntastic_error location panel
+            Errors
+        endif
+    endfunction
+    nnoremap <Leader>s :call ToggleErrors()<cr>
+
+    " ,en ,ep to jump between errors
+    function! <SID>LocationPrevious()
+    try
+        lprev
+    catch /^Vim\%((\a\+)\)\=:E553/
+        llast
+    endtry
+    endfunction
+
+    function! <SID>LocationNext()
+    try
+        lnext
+    catch /^Vim\%((\a\+)\)\=:E553/
+        lfirst
+    endtry
+    endfunction
+
+    nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
+    nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
+    nmap <silent> <Leader>ep    <Plug>LocationPrevious
+    nmap <silent> <Leader>en    <Plug>LocationNext
+
+    " 修改高亮的背景色, 适应主题
+    highlight SyntasticErrorSign guifg=white guibg=black
+
+    " 禁止插件检查java
+    " thanks to @marsqing, see https://github.com/wklken/k-vim/issues/164
+    let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['java'] }
 " }}}
 
 
