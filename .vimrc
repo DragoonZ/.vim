@@ -5,7 +5,8 @@ syntax on
 set nocompatible
 filetype off
 " vim-plug
-
+" OS X下backspace不工作问题
+set backspace=2
 call plug#begin('~/.vim/plugged')
 Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-fugitive'
