@@ -5,7 +5,7 @@ syntax on
 set nocompatible
 filetype off
 " vim-plug
-" OS X下backspace不工作问题
+" OS X 下 backspace 不工作问题
 set backspace=2
 call plug#begin('~/.vim/plugged')
 Plug 'Valloric/YouCompleteMe'
@@ -30,29 +30,29 @@ call plug#end()
     let g:airline_right_alt_sep = '❮'
     let g:airline_symbols.linenr = '¶'
     let g:airline_symbols.branch = '⎇'
-    " 是否打开tabline
+    " 是否打开 tabline
     " let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 " ################### 自动补全 ###################
 
 " YouCompleteMe {{{
-    "youcompleteme  默认tab  s-tab 和自动补全冲突
+    "youcompleteme  默认 tab  s-tab 和自动补全冲突
     "let g:ycm_key_list_select_completion=['<c-n>']
     let g:ycm_key_list_select_completion = ['<Down>']
     "let g:ycm_key_list_previous_completion=['<c-p>']
     let g:ycm_key_list_previous_completion = ['<Up>']
     let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
     let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-    let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+    let g:ycm_use_ultisnips_completer = 1 "提示 UltiSnips
     let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
     let g:ycm_collect_identifiers_from_tags_files = 1
     " 开启语法关键字补全
     let g:ycm_seed_identifiers_with_syntax=1
 
-    "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+    "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全，不过 python 关键字都很短，所以，需要的自己打开
 
-    " 跳转到定义处, 分屏打开
+    " 跳转到定义处，分屏打开
     let g:ycm_goto_buffer_command = 'horizontal-split'
     " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
     nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -63,9 +63,9 @@ call plug#end()
         let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
     endif
 
-    " 直接触发自动补全 insert模式下
+    " 直接触发自动补全 insert 模式下
     " let g:ycm_key_invoke_completion = '<C-Space>'
-    " 黑名单,不启用
+    " 黑名单，不启用
     let g:ycm_filetype_blacklist = {
         \ 'tagbar' : 1,
         \ 'gitcommit' : 1,
@@ -85,15 +85,15 @@ call plug#end()
 
     " checkers
     " 最轻量
-    " let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
+    " let g:syntastic_python_checkers=['pyflakes'] " 使用 pyflakes
     " 中等
     " error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
-    let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
+    let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用 pyflakes, 速度比 pylint 快
     let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
-    " 重量级, 但是足够强大, 定制完成后相当个性化
+    " 重量级，但是足够强大，定制完成后相当个性化
     " pylint codes: http://pylint-messages.wikidot.com/all-codes
-    " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
-    " let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
+    " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用 pyflakes, 速度比 pylint 快
+    " let g:syntastic_python_checkers=['pylint'] " 使用 pyflakes, 速度比 pylint 快
     " let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
 
     " if js
@@ -139,10 +139,10 @@ call plug#end()
     nmap <silent> <Leader>ep    <Plug>LocationPrevious
     nmap <silent> <Leader>en    <Plug>LocationNext
 
-    " 修改高亮的背景色, 适应主题
+    " 修改高亮的背景色，适应主题
     highlight SyntasticErrorSign guifg=white guibg=black
 
-    " 禁止插件检查java
+    " 禁止插件检查 java
     " thanks to @marsqing, see https://github.com/wklken/k-vim/issues/164
     let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['java'] }
 " }}}
@@ -154,8 +154,8 @@ call plug#end()
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
     let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-    " 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
-    " 进入对应filetype的snippets进行编辑
+    " 定义存放代码片段的文件夹 .vim/UltiSnips 下，使用自定义和默认的，将会的到全局，有冲突的会提示
+    " 进入对应 filetype 的 snippets 进行编辑
     map <leader>us :UltiSnipsEdit<CR>
 
     " ctrl+j/k 进行选择
@@ -181,7 +181,7 @@ call plug#end()
 
 
 " delimitMate {{{
-    " for python docstring ",优化输入
+    " for python docstring ", 优化输入
     au FileType python let b:delimitMate_nesting_quotes = ['"']
     au FileType php let delimitMate_matchpairs = "(:),[:],{:}"
     " 关闭某些类型文件的自动补全
@@ -193,12 +193,12 @@ call plug#end()
     let g:closetag_html_style=1
 " }}}
 
-" 命令行（在状态行下）的高度，默认为1，这里是2
+" 命令行（在状态行下）的高度，默认为 1，这里是 2
 set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 " Always show the status line - use 2 lines for the status bar
 set laststatus=2
 
-" history存储容量
+" history 存储容量
 set history=2000
 
 " 检测文件类型
@@ -210,21 +210,21 @@ filetype plugin on
 " 启动自动补全
 filetype plugin indent on
 
-" theme主题
+" theme 主题
 set background=dark
 set t_Co=256
 
 colorscheme solarized
 
-" 定义函数AutoSetFileHead，自动插入文件头
+" 定义函数 AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
-    "如果文件类型为.sh文件
+    "如果文件类型为。sh 文件
     if &filetype == 'sh'
         call setline(1, "\#!/bin/bash")
     endif
 
-    "如果文件类型为python
+    "如果文件类型为 python
     if &filetype == 'python'
         call setline(1, "\#!/usr/bin/env python")
         call append(1, "\# encoding: utf-8")
@@ -243,7 +243,7 @@ autocmd BufRead,BufNewFile *.part set filetype=html
 " disable showmatch when use > in php
 au BufWinEnter *.php set mps-=<:>
 
-" 保存python文件时删除多余空格
+" 保存 python 文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
@@ -253,7 +253,7 @@ endfun
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " F2 行号开关，用于鼠标复制代码用
-" 为方便复制，用<F2>开启/关闭行号显示:
+" 为方便复制，用<F2>开启 / 关闭行号显示：
 function! HideNumber()
   if(&relativenumber == &number)
     set relativenumber! number!
@@ -273,8 +273,8 @@ set smartindent
 " never add copyindent, case error   " copy the previous indentation on autoindenting
 set autoindent
 
-" tab相关变更
-" 设置Tab键的宽度        [等同的空格个数]
+" tab 相关变更
+" 设置 Tab 键的宽度        『等同的空格个数』
 set tabstop=4
 " 每一次缩进对应的空格数
 set shiftwidth=4
@@ -282,7 +282,7 @@ set shiftwidth=4
 set softtabstop=4
 " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
 set smarttab
-" 将Tab自动转化成空格[需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+" 将 Tab 自动转化成空格『需要输入真正的 Tab 键时，使用 Ctrl+V + Tab]
 set expandtab
 " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
@@ -301,13 +301,13 @@ set nowrap
 set ruler
 " 在状态栏显示正在输入的命令
 set showcmd
-" 左下角显示当前vim模式
+" 左下角显示当前 vim 模式
 set showmode
 
 " 启用鼠标
 set mouse=a
 
-" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
+" 设置 退出 vim 后，内容显示在终端屏幕，可以用于查看和复制，不需要可以去掉
 " 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
 
