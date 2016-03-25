@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'hotoo/pangu.vim'
 call plug#end()
 
 " airline {{{
