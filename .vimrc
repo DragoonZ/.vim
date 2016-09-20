@@ -214,7 +214,7 @@ filetype plugin indent on
 set background=dark
 set t_Co=256
 
-colorscheme solarized
+colorscheme molokai 
 
 " 定义函数 AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
